@@ -31,6 +31,7 @@ help:
 	@echo "  DATA defaults to the first file found in data/"
 
 run:
+	@mkdir -p $(dir $(LOG))
 	$(PYTHON) detector.py "$(DATA)" --log "$(LOG)"
 
 filter:
@@ -48,6 +49,7 @@ clear:
 	if [ "$$CODE" = "200" ]; then echo "deleted"; else echo "not found ($$CODE)"; fi
 
 fresh: clear
+	@mkdir -p $(dir $(LOG))
 	$(PYTHON) detector.py "$(DATA)" --log "$(LOG)" --clear
 	$(COMPOSE) restart logstash
 	$(PYTHON) manage_display_filter.py --es-url $(ES) --kibana-url $(KIBANA) --setup-kibana

@@ -8,4 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt -r requirements-ode.txt
 COPY detectors/ detectors/
 COPY detector.py bsm_agent.py ode_config.json ./
 
+RUN mkdir -p /mbd/logs
+
 CMD ["python", "bsm_agent.py", "--log", "/mbd/logs/misbehaviors.log"]
